@@ -1,0 +1,20 @@
+# 機密情報・環境変数
+.env
+.env.*
+*.pem
+*.key
+*.p12
+
+# 顧客データ・ログ
+*.csv
+*.xlsx
+/data/
+/logs/
+/secrets/
+
+# 個人情報が含まれやすいファイル
+customer_list.*
+user_data/
+
+# 削除ファイルの一時退避先
+/.trash/

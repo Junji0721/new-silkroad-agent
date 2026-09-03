@@ -1,0 +1,28 @@
+# 環境変数・シークレット
+config/.env
+*.env
+.env.local
+
+# データ格納フォルダ(生データ・加工データ・DB)
+data/raw/
+data/processed/
+data/databases/
+リサーチ/data/raw/
+リサーチ/data/processed/
+リサーチ/data/databases/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node
+node_modules/
+
+# OS
+.DS_Store
+
+# エディタ・IDE
+.vscode/
+.idea/

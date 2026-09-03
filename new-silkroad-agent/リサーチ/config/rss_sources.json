@@ -1,0 +1,51 @@
+[
+  {
+    "id": "aljazeera",
+    "name": "Al Jazeera",
+    "url": "https://www.aljazeera.com/xml/rss/all.xml",
+    "language": "en",
+    "note": "公式RSS(全ニュース)"
+  },
+  {
+    "id": "trtworld",
+    "name": "TRT World",
+    "url": "https://www.trtworld.com/feed/rss.xml",
+    "language": "en",
+    "note": "公式RSS"
+  },
+  {
+    "id": "wion",
+    "name": "WION",
+    "url": "https://news.google.com/rss/search?q=site:wionews.com&hl=en-IN&gl=IN&ceid=IN:en",
+    "language": "en",
+    "note": "公式サイトがBot保護(HTTP 403)のため、Googleニュースのサイト内検索RSSで代替取得"
+  },
+  {
+    "id": "scmp",
+    "name": "SCMP(南華早報)",
+    "url": "https://www.scmp.com/rss/91/feed",
+    "language": "en",
+    "note": "公式RSS(News全般)"
+  },
+  {
+    "id": "xinhua",
+    "name": "新華社通信(Xinhua)",
+    "url": "https://news.google.com/rss/search?q=site:english.news.cn&hl=en-US&gl=US&ceid=US:en",
+    "language": "en",
+    "note": "公式RSS(worldrss.xml)が2018年から更新停止のため、Googleニュースのサイト内検索RSSで代替取得"
+  },
+  {
+    "id": "diplomat_ca",
+    "name": "The Diplomat (Central Asia)",
+    "url": "https://thediplomat.com/regions/central-asia/feed/",
+    "language": "en",
+    "note": "公式RSS(中央アジア地域カテゴリ)"
+  },
+  {
+    "id": "rt",
+    "name": "RT",
+    "url": "https://www.rt.com/rss/news/",
+    "language": "en",
+    "note": "公式RSS"
+  }
+]

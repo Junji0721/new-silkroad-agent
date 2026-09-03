@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(.env)",
+      "Edit(.env)",
+      "Read(.env.*)",
+      "Edit(.env.*)",
+      "Read(*.pem)",
+      "Edit(*.pem)",
+      "Read(*.key)",
+      "Edit(*.key)",
+      "Read(*.p12)",
+      "Edit(*.p12)",
+      "Read(*.csv)",
+      "Edit(*.csv)",
+      "Read(*.xlsx)",
+      "Edit(*.xlsx)",
+      "Read(/data/**)",
+      "Edit(/data/**)",
+      "Read(/logs/**)",
+      "Edit(/logs/**)",
+      "Read(/secrets/**)",
+      "Edit(/secrets/**)",
+      "Read(customer_list.*)",
+      "Edit(customer_list.*)",
+      "Read(user_data/**)",
+      "Edit(user_data/**)"
+    ]
+  }
+}
