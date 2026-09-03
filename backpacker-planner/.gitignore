@@ -1,0 +1,17 @@
+# Environment
+.env
+.env.local
+.DS_Store
+
+# Data (can contain API keys or sensitive info)
+data/raw/
+*.log
+
+# Temporary files
+*.tmp
+.cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp

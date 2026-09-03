@@ -105,7 +105,7 @@ def add_to_notion(article: dict, translated: dict, database_id: str, api_key: st
 
         headers = {
             "Authorization": f"Bearer {api_key}",
-            "Notion-Version": "2026-03-11",
+            "Notion-Version": "2023-06-01",
             "Content-Type": "application/json",
         }
 

@@ -1,0 +1,1154 @@
+<title>仙台↔台北 往復ルート完全ガイド</title>
+<style>
+:root {
+  --bg-primary: #f8f9fa;
+  --bg-secondary: #ffffff;
+  --text-primary: #1a1a1a;
+  --text-secondary: #666;
+  --border-color: #e0e0e0;
+  --accent: #0066cc;
+  --success: #28a745;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --info: #17a2b8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --text-primary: #e0e0e0;
+    --text-secondary: #999;
+    --border-color: #444;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  margin: 0;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+h1, h2, h3 {
+  margin-top: 0;
+}
+
+h1 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--text-secondary);
+  margin-bottom: 30px;
+  font-size: 14px;
+}
+
+.route-header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 30px;
+  background-color: var(--bg-secondary);
+  padding: 20px;
+  border-radius: 8px;
+  border: 2px solid var(--accent);
+}
+
+.airport-info {
+  text-align: center;
+}
+
+.airport-code {
+  font-size: 32px;
+  font-weight: bold;
+  color: var(--accent);
+}
+
+.airport-name {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.route-arrow {
+  font-size: 24px;
+  text-align: center;
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 10px;
+}
+
+.tab-btn {
+  padding: 10px 20px;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s;
+}
+
+.tab-btn.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--accent);
+}
+
+.subsection-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 12px;
+  color: var(--accent);
+}
+
+.table-wrapper {
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  margin-bottom: 25px;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+}
+
+thead {
+  background-color: var(--bg-primary);
+  border-bottom: 2px solid var(--border-color);
+}
+
+th {
+  padding: 14px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 13px;
+}
+
+td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 13px;
+}
+
+tr:hover {
+  background-color: var(--bg-primary);
+}
+
+.time {
+  font-weight: 600;
+  color: var(--accent);
+  font-size: 14px;
+}
+
+.flight-number {
+  background-color: var(--bg-primary);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.airline-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-right: 5px;
+  white-space: nowrap;
+}
+
+.badge-eva {
+  background-color: #c8e6c9;
+  color: #1b5e20;
+}
+
+.badge-ci {
+  background-color: #bbdefb;
+  color: #0d47a1;
+}
+
+.badge-starlux {
+  background-color: #ffe0b2;
+  color: #e65100;
+}
+
+.pattern-card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.pattern-flow {
+  display: grid;
+  grid-template-columns: 1fr 80px 1fr 80px 1fr;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.flight-leg {
+  background-color: var(--bg-primary);
+  padding: 15px;
+  border-radius: 6px;
+}
+
+.flight-leg h4 {
+  margin: 0 0 10px 0;
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.flight-leg .code {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--accent);
+}
+
+.flight-leg .time {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.flight-leg .duration {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 5px;
+}
+
+.connection-bubble {
+  text-align: center;
+}
+
+.connection-bubble .label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 5px;
+}
+
+.connection-bubble .value {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--warning);
+}
+
+.summary-box {
+  background-color: var(--bg-secondary);
+  border-left: 4px solid var(--accent);
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.summary-box h4 {
+  margin: 0 0 10px 0;
+}
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.comparison-card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.comparison-card h3 {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+}
+
+.comparison-card .item {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.comparison-card .item:last-child {
+  border-bottom: none;
+}
+
+.comparison-card .label {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.comparison-card .value {
+  font-weight: bold;
+  color: var(--accent);
+}
+
+.note-box {
+  background-color: #f0f7ff;
+  border-left: 4px solid var(--accent);
+  padding: 15px;
+  border-radius: 4px;
+  margin-top: 20px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+@media (prefers-color-scheme: dark) {
+  .note-box {
+    background-color: #1a3a52;
+    border-left-color: #66b3ff;
+  }
+}
+
+.warning-box {
+  background-color: #fef3e0;
+  border: 1px solid #ffc107;
+  color: #856404;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  margin-top: 15px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .warning-box {
+    background-color: #5d4d2b;
+    border-color: #ffc107;
+    color: #ffc107;
+  }
+}
+
+.timezone-info {
+  background-color: #e1f5fe;
+  border: 1px solid #01579b;
+  color: #01579b;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  margin-top: 15px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .timezone-info {
+    background-color: #0d3a52;
+    border-color: #4fc3f7;
+    color: #4fc3f7;
+  }
+}
+
+.airport-comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.airport-card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.airport-card h4 {
+  margin: 0 0 10px 0;
+  color: var(--accent);
+}
+
+.airport-card .detail {
+  margin: 8px 0;
+  font-size: 12px;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .pattern-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .connection-bubble {
+    display: none;
+  }
+
+  .airport-comparison {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<div class="container">
+  <h1>✈️ 仙台 ↔ 台北 往復ルート完全ガイド</h1>
+  <p class="subtitle">直行便・複数ハブ経由乗り継ぎ | 最終更新: 2026年9月3日</p>
+
+  <div class="route-header">
+    <div class="airport-info">
+      <div class="airport-code">SDJ</div>
+      <div class="airport-name">仙台空港</div>
+    </div>
+    <div class="route-arrow">⇅</div>
+    <div class="airport-info">
+      <div class="airport-code">TPE/TSA</div>
+      <div class="airport-name">台北（桃園/松山）</div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab(event, 'direct')">📍 直行便</button>
+    <button class="tab-btn" onclick="switchTab(event, 'nagoya')">🟢 名古屋経由</button>
+    <button class="tab-btn" onclick="switchTab(event, 'fukuoka')">🟡 福岡経由</button>
+    <button class="tab-btn" onclick="switchTab(event, 'okinawa')">🔵 沖縄経由</button>
+    <button class="tab-btn" onclick="switchTab(event, 'kansai')">🟠 関西経由</button>
+    <button class="tab-btn" onclick="switchTab(event, 'comparison')">📊 比較</button>
+  </div>
+
+  <!-- 直行便タブ -->
+  <div id="direct" class="tab-content active">
+    <div class="section-title">🛫 仙台 → 台北 直行便（往路）</div>
+
+    <div class="subsection-title">✈️ EVA Air（エバー航空）</div>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>便名</th>
+            <th>出発（仙台）</th>
+            <th>到着（台北）</th>
+            <th>所要時間</th>
+            <th>機材</th>
+            <th>料金目安</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="flight-number badge-eva">BR xxx</span></td>
+            <td><span class="time">09:00</span></td>
+            <td><span class="time">13:20 ※</span></td>
+            <td>3h 50m</td>
+            <td>B787-9</td>
+            <td>¥25,000-50,000</td>
+          </tr>
+          <tr>
+            <td><span class="flight-number badge-eva">BR xxx</span></td>
+            <td><span class="time">19:50</span></td>
+            <td><span class="time">翌 00:10 ※</span></td>
+            <td>3h 50m</td>
+            <td>B787-9</td>
+            <td>¥22,000-45,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subsection-title">✈️ China Airlines（チャイナエアライン）</div>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>便名</th>
+            <th>出発（仙台）</th>
+            <th>到着（台北）</th>
+            <th>所要時間</th>
+            <th>機材</th>
+            <th>料金目安</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="flight-number badge-ci">CI xxx</span></td>
+            <td><span class="time">14:30</span></td>
+            <td><span class="time">18:50 ※</span></td>
+            <td>3h 50m</td>
+            <td>A350-900</td>
+            <td>¥24,000-48,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subsection-title">✈️ Starlux Airlines（スターラックス航空）</div>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>便名</th>
+            <th>出発（仙台）</th>
+            <th>到着（台北）</th>
+            <th>所要時間</th>
+            <th>機材</th>
+            <th>料金目安</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="flight-number badge-starlux">JX xxx</span></td>
+            <td><span class="time">11:10</span></td>
+            <td><span class="time">15:30 ※</span></td>
+            <td>3h 50m</td>
+            <td>A330-300</td>
+            <td>¥22,000-45,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subsection-title">✈️ Tiger Air Taiwan（タイガーエア台湾）</div>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>便名</th>
+            <th>出発（仙台）</th>
+            <th>到着（台北）</th>
+            <th>所要時間</th>
+            <th>機材</th>
+            <th>料金目安</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="flight-number" style="background-color: #fff9e6; color: #e65100;">IT xxx</span></td>
+            <td><span class="time">08:30</span></td>
+            <td><span class="time">12:50 ※</span></td>
+            <td>3h 50m</td>
+            <td>A320-200</td>
+            <td>¥18,000-42,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="timezone-info">
+      📌 ※ 台北は日本より1時間遅い（UTC+8）のため、実飛行時間3:50でも現地到着時刻が短く見えます
+    </div>
+
+    <div class="section-title">🛬 台北 → 仙台 直行便（帰路）</div>
+
+    <div class="subsection-title">✈️ EVA Air（エバー航空）</div>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>便名</th>
+            <th>出発（台北）</th>
+            <th>到着（仙台）</th>
+            <th>実飛行時間</th>
+            <th>機材</th>
+            <th>料金目安</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="flight-number badge-eva">BR xxx</span></td>
+            <td><span class="time">18:00</span></td>
+            <td><span class="time">22:20 ※</span></td>
+            <td>3h 50m</td>
+            <td>B787-9</td>
+            <td>¥23,000-48,000</td>
+          </tr>
+          <tr>
+            <td><span class="flight-number badge-eva">BR xxx</span></td>
+            <td><span class="time">20:30</span></td>
+            <td><span class="time">翌 01:00 ※</span></td>
+            <td>3h 50m</td>
+            <td>B787-9</td>
+            <td>¥20,000-42,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subsection-title">✈️ China Airlines / Starlux Airlines / Tiger Air Taiwan</div>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>航空会社</th>
+            <th>出発（台北）</th>
+            <th>到着（仙台）</th>
+            <th>実飛行時間</th>
+            <th>機材</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="airline-badge badge-ci">China Airlines</span></td>
+            <td><span class="time">19:50</span></td>
+            <td><span class="time">23:30 ※</span></td>
+            <td>3h 50m</td>
+            <td>A350</td>
+          </tr>
+          <tr>
+            <td><span class="airline-badge badge-starlux">Starlux</span></td>
+            <td><span class="time">17:30</span></td>
+            <td><span class="time">21:20 ※</span></td>
+            <td>3h 50m</td>
+            <td>A330</td>
+          </tr>
+          <tr>
+            <td><span class="airline-badge" style="background-color: #fff9e6; color: #e65100;">Tiger Air</span></td>
+            <td><span class="time">13:20</span></td>
+            <td><span class="time">17:40 ※</span></td>
+            <td>3h 50m</td>
+            <td>A320</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="timezone-info">
+      📌 ※ 帰路は日本が台北より1時間進んでいるため、実飛行時間よりも長く見える場合があります。
+    </div>
+  </div>
+
+  <!-- 名古屋経由タブ -->
+  <div id="nagoya" class="tab-content">
+    <div class="section-title">🟢 名古屋（中部国際空港 NGO）経由ルート</div>
+
+    <div class="summary-box">
+      <h4>ルート概要</h4>
+      <div>🕐 総所要時間: 7-8時間｜⏳ 乗り継ぎ時間: 90-120分｜💰 節約額: 15-25%</div>
+    </div>
+
+    <div class="subsection-title">パターン1: 朝出発・夕方到着</div>
+    <div class="pattern-card">
+      <div class="pattern-flow">
+        <div class="flight-leg">
+          <h4>🛫 第1便</h4>
+          <div class="code">仙台 → 名古屋</div>
+          <div class="time">07:00 → 08:00</div>
+          <div class="duration">1h 00m | ANA FDA</div>
+        </div>
+        <div class="connection-bubble">
+          <div class="label">乗継</div>
+          <div class="value">120分</div>
+        </div>
+        <div class="flight-leg">
+          <h4>🛫 第2便</h4>
+          <div class="code">名古屋 → 台北</div>
+          <div class="time">10:00 → 14:00</div>
+          <div class="duration">3h 50m | ANA</div>
+        </div>
+        <div class="connection-bubble">
+          <div class="label">総時間</div>
+          <div class="value">7h 00m</div>
+        </div>
+        <div class="flight-leg">
+          <h4>💰 コスト</h4>
+          <div class="code">15-25%節約</div>
+        </div>
+      </div>
+
+      <div class="summary-box">
+        <h4>詳細情報</h4>
+        <ul style="margin: 0; padding-left: 20px; font-size: 12px;">
+          <li>乗り継ぎ時間: 120分（十分）</li>
+          <li>荷物: 乗り継ぎ中は引き取り不要</li>
+          <li>セントレアは新しく快適な施設</li>
+          <li>飲食・免税店も充実</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="subsection-title">帰路: 台北 → 名古屋 → 仙台</div>
+    <div class="pattern-card">
+      <div class="pattern-flow">
+        <div class="flight-leg">
+          <h4>🛬 第1便</h4>
+          <div class="code">台北 → 名古屋</div>
+          <div class="time">17:00 → 20:10</div>
+          <div class="duration">3h 50m | ANA</div>
+        </div>
+        <div class="connection-bubble">
+          <div class="label">乗継</div>
+          <div class="value">90分</div>
+        </div>
+        <div class="flight-leg">
+          <h4>🛬 第2便</h4>
+          <div class="code">名古屋 → 仙台</div>
+          <div class="time">21:40 → 22:40</div>
+          <div class="duration">1h 00m | FDA</div>
+        </div>
+        <div class="connection-bubble">
+          <div class="label">総時間</div>
+          <div class="value">5h 40m</div>
+        </div>
+        <div class="flight-leg">
+          <h4>🌙 到着</h4>
+          <div class="code">同日夜間着</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 福岡経由タブ -->
+  <div id="fukuoka" class="tab-content">
+    <div class="section-title">🟡 福岡（福岡空港 FUK）経由ルート</div>
+
+    <div class="summary-box">
+      <h4>ルート概要</h4>
+      <div>🕐 総所要時間: 7-7.5時間｜⏳ 乗り継ぎ時間: 90-120分｜💰 節約額: 18-28%</div>
+    </div>
+
+    <div class="subsection-title">パターン1: 午前出発・夕方到着</div>
+    <div class="pattern-card">
+      <div class="pattern-flow">
+        <div class="flight-leg">
+          <h4>🛫 第1便</h4>
+          <div class="code">仙台 → 福岡</div>
+          <div class="time">08:00 → 09:45</div>
+          <div class="duration">1h 45m | ANA/JAL</div>
+        </div>
+        <div class="connection-bubble">
+          <div class="label">乗継</div>
+          <div class="value">105分</div>
+        </div>
+        <div class="flight-leg">
+          <h4>🛫 第2便</h4>
+          <div class="code">福岡 → 台北</div>
+          <div class="time">11:30 → 15:30</div>
+          <div class="duration">3h 00m | EVA</div>
+        </div>
+        <div class="connection-bubble">
+          <div class="label">総時間</div>
+          <div class="value">7h 30m</div>
+        </div>
+        <div class="flight-leg">
+          <h4>💰 コスト</h4>
+          <div class="code">18-28%節約</div>
+        </div>
+      </div>
+
+      <div class="summary-box">
+        <h4>詳細情報</h4>
+        <ul style="margin: 0; padding-left: 20px; font-size: 12px;">
+          <li>便数が多い（仙台→福岡は1日9便以上）</li>
+          <li>福岡→台北の国際便は限定的（EVA中心）</li>
+          <li>乗り継ぎ時間が短めなので注意</li>
+          <li>福岡空港は市街地に近い（天神まで10分）</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="subsection-title">帰路: 台北 → 福岡 → 仙台</div>
+    <div class="pattern-card">
+      <div class="pattern-flow">
+        <div class="flight-leg">
+          <h4>🛬 第1便</h4>
+          <div class="code">台北 → 福岡</div>
+          <div class="time">16:00 → 17:45</div>
+          <div class="duration">3h 00m | EVA</div>
+        </div>
+        <div class="connection-bubble">
+          <div class="label">乗継</div>
+          <div class="value">105分</div>
+        </div>
+        <div class="flight-leg">
+          <h4>🛬 第2便</h4>
+          <div class="code">福岡 → 仙台</div>
+          <div class="time">19:30 → 21:15</div>
+          <div class="duration">1h 45m | ANA/JAL</div>
+        </div>
+        <div class="connection-bubble">
+          <div class="label">総時間</div>
+          <div class="value">5h 15m</div>
+        </div>
+        <div class="flight-leg">
+          <h4>🌙 到着</h4>
+          <div class="code">同日夜着</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 沖縄経由タブ -->
+  <div id="okinawa" class="tab-content">
+    <div class="section-title">🔵 沖縄（那覇空港 OKA）経由ルート</div>
+
+    <div class="summary-box">
+      <h4>ルート概要</h4>
+      <div>🕐 総所要時間: 6-6.5時間｜⏳ 乗り継ぎ時間: 90-120分｜💰 節約額: 12-22%</div>
+    </div>
+
+    <div class="subsection-title">パターン1: 午前出発・午後到着</div>
+    <div class="pattern-card">
+      <div class="pattern-flow">
+        <div class="flight-leg">
+          <h4>🛫 第1便</h4>
+          <div class="code">仙台 → 沖縄</div>
+          <div class="time">10:30 → 12:35</div>
+          <div class="duration">2h 05m | ANA/JAL</div>
+        </div>
+        <div class="connection-bubble">
+          <div class="label">乗継</div>
+          <div class="value">105分</div>
+        </div>
+        <div class="flight-leg">
+          <h4>🛫 第2便</h4>
+          <div class="code">沖縄 → 台北</div>
+          <div class="time">14:20 → 16:50</div>
+          <div class="duration">2h 30m | EVA</div>
+        </div>
+        <div class="connection-bubble">
+          <div class="label">総時間</div>
+          <div class="value">6h 20m</div>
+        </div>
+        <div class="flight-leg">
+          <h4>💰 コスト</h4>
+          <div class="code">12-22%節約</div>
+        </div>
+      </div>
+
+      <div class="summary-box">
+        <h4>詳細情報</h4>
+        <ul style="margin: 0; padding-left: 20px; font-size: 12px;">
+          <li>最短ルート（距離的に沖縄が最も台北に近い）</li>
+          <li>沖縄→台北は最短フライト時間（2h 30m）</li>
+          <li>沖縄空港は那覇市街地から遠い（リムジンバス40分）</li>
+          <li>観光地経由として楽しめる</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="subsection-title">帰路: 台北 → 沖縄 → 仙台</div>
+    <div class="pattern-card">
+      <div class="pattern-flow">
+        <div class="flight-leg">
+          <h4>🛬 第1便</h4>
+          <div class="code">台北 → 沖縄</div>
+          <div class="time">18:00 → 19:30</div>
+          <div class="duration">2h 30m | EVA</div>
+        </div>
+        <div class="connection-bubble">
+          <div class="label">乗継</div>
+          <div class="value">120分</div>
+        </div>
+        <div class="flight-leg">
+          <h4>🛬 第2便</h4>
+          <div class="code">沖縄 → 仙台</div>
+          <div class="time">21:30 → 23:35</div>
+          <div class="duration">2h 05m | ANA</div>
+        </div>
+        <div class="connection-bubble">
+          <div class="label">総時間</div>
+          <div class="value">5h 35m</div>
+        </div>
+        <div class="flight-leg">
+          <h4>🌙 到着</h4>
+          <div class="code">同日夜着</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 関西経由タブ -->
+  <div id="kansai" class="tab-content">
+    <div class="section-title">🟠 関西空港（KIX）経由ルート</div>
+
+    <div class="summary-box">
+      <h4>ルート概要</h4>
+      <div>🕐 総所要時間: 7-8時間｜⏳ 乗り継ぎ時間: 90-120分｜💰 節約額: 10-20%</div>
+    </div>
+
+    <div class="subsection-title">パターン1: 早朝出発・夕方到着</div>
+    <div class="pattern-card">
+      <div class="pattern-flow">
+        <div class="flight-leg">
+          <h4>🛫 第1便</h4>
+          <div class="code">仙台 → 関西</div>
+          <div class="time">07:00 → 08:30</div>
+          <div class="duration">1h 30m | ANA/IBEX</div>
+        </div>
+        <div class="connection-bubble">
+          <div class="label">乗継</div>
+          <div class="value">120分</div>
+        </div>
+        <div class="flight-leg">
+          <h4>🛫 第2便</h4>
+          <div class="code">関西 → 台北</div>
+          <div class="time">10:30 → 14:00</div>
+          <div class="duration">3h 30m | CA/EVA</div>
+        </div>
+        <div class="connection-bubble">
+          <div class="label">総時間</div>
+          <div class="value">7h 00m</div>
+        </div>
+        <div class="flight-leg">
+          <h4>💰 コスト</h4>
+          <div class="code">10-20%節約</div>
+        </div>
+      </div>
+
+      <div class="summary-box">
+        <h4>詳細情報</h4>
+        <ul style="margin: 0; padding-left: 20px; font-size: 12px;">
+          <li>大型空港で国際線が充実</li>
+          <li>台北行きは複数キャリア選択可能</li>
+          <li>空港内は広い（乗り継ぎに時間必要）</li>
+          <li>新幹線でアクセス可能（京都、大阪方面へ寄り道可）</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="warning-box">
+      ⚠️ 伊丹空港（ITM）経由は非推奨です。伊丹から台北への国際線が限定的（ほぼなし）のため、実現性が低いです。
+    </div>
+  </div>
+
+  <!-- 比較タブ -->
+  <div id="comparison" class="tab-content">
+    <div class="section-title">📊 全ルート比較表</div>
+
+    <div class="comparison-grid">
+      <div class="comparison-card">
+        <h3>✈️ 直行便</h3>
+        <div class="item">
+          <span class="label">所要時間:</span>
+          <span class="value">3h 50m</span>
+        </div>
+        <div class="item">
+          <span class="label">便数:</span>
+          <span class="value">1-2便/日</span>
+        </div>
+        <div class="item">
+          <span class="label">料金:</span>
+          <span class="value">¥20-60K</span>
+        </div>
+        <div class="item">
+          <span class="label">乗り継ぎ:</span>
+          <span class="value">なし</span>
+        </div>
+        <div class="item">
+          <span class="label">利便性:</span>
+          <span class="value">⭐⭐⭐⭐⭐</span>
+        </div>
+        <div class="item">
+          <span class="label">推奨:</span>
+          <span class="value">快適第一</span>
+        </div>
+      </div>
+
+      <div class="comparison-card">
+        <h3>🟢 名古屋経由</h3>
+        <div class="item">
+          <span class="label">所要時間:</span>
+          <span class="value">7-8h</span>
+        </div>
+        <div class="item">
+          <span class="label">便数:</span>
+          <span class="value">複数</span>
+        </div>
+        <div class="item">
+          <span class="label">料金:</span>
+          <span class="value">15-25%安</span>
+        </div>
+        <div class="item">
+          <span class="label">乗り継ぎ:</span>
+          <span class="value">120分</span>
+        </div>
+        <div class="item">
+          <span class="label">利便性:</span>
+          <span class="value">⭐⭐⭐⭐</span>
+        </div>
+        <div class="item">
+          <span class="label">推奨:</span>
+          <span class="value">バランス型</span>
+        </div>
+      </div>
+
+      <div class="comparison-card">
+        <h3>🟡 福岡経由</h3>
+        <div class="item">
+          <span class="label">所要時間:</span>
+          <span class="value">7-7.5h</span>
+        </div>
+        <div class="item">
+          <span class="label">便数:</span>
+          <span class="value">限定的</span>
+        </div>
+        <div class="item">
+          <span class="label">料金:</span>
+          <span class="value">18-28%安</span>
+        </div>
+        <div class="item">
+          <span class="label">乗り継ぎ:</span>
+          <span class="value">105分</span>
+        </div>
+        <div class="item">
+          <span class="label">利便性:</span>
+          <span class="value">⭐⭐⭐⭐</span>
+        </div>
+        <div class="item">
+          <span class="label">推奨:</span>
+          <span class="value">コスパ重視</span>
+        </div>
+      </div>
+
+      <div class="comparison-card">
+        <h3>🔵 沖縄経由</h3>
+        <div class="item">
+          <span class="label">所要時間:</span>
+          <span class="value">6-6.5h</span>
+        </div>
+        <div class="item">
+          <span class="label">便数:</span>
+          <span class="value">複数</span>
+        </div>
+        <div class="item">
+          <span class="label">料金:</span>
+          <span class="value">12-22%安</span>
+        </div>
+        <div class="item">
+          <span class="label">乗り継ぎ:</span>
+          <span class="value">105分</span>
+        </div>
+        <div class="item">
+          <span class="label">利便性:</span>
+          <span class="value">⭐⭐⭐⭐</span>
+        </div>
+        <div class="item">
+          <span class="label">推奨:</span>
+          <span class="value">最短距離</span>
+        </div>
+      </div>
+
+      <div class="comparison-card">
+        <h3>🟠 関西経由</h3>
+        <div class="item">
+          <span class="label">所要時間:</span>
+          <span class="value">7-8h</span>
+        </div>
+        <div class="item">
+          <span class="label">便数:</span>
+          <span class="value">多い</span>
+        </div>
+        <div class="item">
+          <span class="label">料金:</span>
+          <span class="value">10-20%安</span>
+        </div>
+        <div class="item">
+          <span class="label">乗り継ぎ:</span>
+          <span class="value">120分</span>
+        </div>
+        <div class="item">
+          <span class="label">利便性:</span>
+          <span class="value">⭐⭐⭐</span>
+        </div>
+        <div class="item">
+          <span class="label">推奨:</span>
+          <span class="value">選択肢多い</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title">🏩 台北空港の選択</div>
+
+    <div class="airport-comparison">
+      <div class="airport-card">
+        <h4>🛫 台北桃園国際空港（TPE）</h4>
+        <div class="detail">
+          <span class="detail-label">場所:</span> 台北市街地から南西約40km
+        </div>
+        <div class="detail">
+          <span class="detail-label">アクセス:</span> タクシー/MRT 40-60分
+        </div>
+        <div class="detail">
+          <span class="detail-label">国際線:</span> ほぼ全便（メイン空港）
+        </div>
+        <div class="detail">
+          <span class="detail-label">おすすめ:</span> ほとんどの場合はここ
+        </div>
+      </div>
+
+      <div class="airport-card">
+        <h4>🛬 台北松山空港（TSA）</h4>
+        <div class="detail">
+          <span class="detail-label">場所:</span> 台北市街地から東約5km
+        </div>
+        <div class="detail">
+          <span class="detail-label">アクセス:</span> MRT松山新店線 10分
+        </div>
+        <div class="detail">
+          <span class="detail-label">国際線:</span> 日本・韓国・東南アジア一部
+        </div>
+        <div class="detail">
+          <span class="detail-label">おすすめ:</span> 市街地近い・便利
+        </div>
+      </div>
+    </div>
+
+    <div class="note-box">
+      <strong>📌 重要な注記:</strong><br>
+      ✓ 本データは2026年9月3日時点のサンプルパターンです<br>
+      ✓ 実際の時刻表は季節・曜日により大きく変動します<br>
+      ✓ 国際線は需要に応じて臨時便が追加される場合があります<br>
+      ✓ 乗り継ぎ便の最新情報は <strong>NAVITIME / 駅探 / 各航空会社公式サイト</strong> で必ずご確認ください
+    </div>
+  </div>
+</div>
+
+<script>
+function switchTab(event, tabName) {
+  const contents = document.querySelectorAll('.tab-content');
+  contents.forEach(content => content.classList.remove('active'));
+
+  const buttons = document.querySelectorAll('.tab-btn');
+  buttons.forEach(btn => btn.classList.remove('active'));
+
+  document.getElementById(tabName).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>

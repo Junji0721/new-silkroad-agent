@@ -1,0 +1,324 @@
+{
+  "route": {
+    "departure": "SDJ",
+    "departure_name": "仙台空港",
+    "arrival": "TPE",
+    "arrival_name": "台北桃園空港",
+    "alternative_arrival": "TSA (台北松山空港)",
+    "search_date": "2026-09-03",
+    "note": "リアルタイム時刻表は OTA（NAVITIME, 駅探）で確認してください"
+  },
+  "direct_flights_outbound": {
+    "summary": {
+      "flight_time": "3h 50m",
+      "price_range": "¥20,000 - ¥60,000",
+      "note": "国際線・片道料金"
+    },
+    "carriers": [
+      {
+        "airline_name": "EVA Air",
+        "airline_jp": "エバー航空",
+        "type": "フルキャリア",
+        "price_range": "¥25,000 - ¥50,000",
+        "flight_time": "3h 50m",
+        "example_departure": "09:00",
+        "example_arrival": "13:20 (同日)",
+        "aircraft": "B787",
+        "frequency": "1-2便/日",
+        "notes": "スターアライアンス / 日本便充実"
+      },
+      {
+        "airline_name": "China Airlines",
+        "airline_jp": "チャイナエアライン",
+        "type": "フルキャリア",
+        "price_range": "¥24,000 - ¥48,000",
+        "flight_time": "3h 50m",
+        "example_departure": "14:30",
+        "example_arrival": "18:50 (同日)",
+        "aircraft": "A350",
+        "frequency": "1便/日",
+        "notes": "台湾フラッグキャリア / 快適"
+      },
+      {
+        "airline_name": "Starlux Airlines",
+        "airline_jp": "スターラックス航空",
+        "type": "フルキャリア",
+        "price_range": "¥22,000 - ¥45,000",
+        "flight_time": "3h 50m",
+        "example_departure": "11:10",
+        "example_arrival": "15:30 (同日)",
+        "aircraft": "A330",
+        "frequency": "1便/日",
+        "notes": "新興キャリア / コスパ重視"
+      },
+      {
+        "airline_name": "Tiger Air Taiwan",
+        "airline_jp": "タイガーエア台湾",
+        "type": "LCC",
+        "price_range": "¥18,000 - ¥42,000",
+        "flight_time": "3h 50m",
+        "example_departure": "08:30",
+        "example_arrival": "12:50 (同日)",
+        "aircraft": "A320",
+        "frequency": "1便/日",
+        "notes": "台湾LCC / 最安値級"
+      }
+    ]
+  },
+  "direct_flights_return": {
+    "summary": {
+      "flight_time": "3h 50m (実飛行時間)",
+      "actual_time": "4h 20m (時差込み)",
+      "price_range": "¥18,000 - ¥55,000",
+      "note": "帰路は時差で到着が同日"
+    },
+    "carriers": [
+      {
+        "airline_name": "EVA Air",
+        "airline_jp": "エバー航空",
+        "type": "フルキャリア",
+        "example_departure": "18:00",
+        "example_arrival": "20:50 (日本時間)",
+        "aircraft": "B787",
+        "frequency": "1-2便/日",
+        "notes": "夜出発が多い"
+      },
+      {
+        "airline_name": "China Airlines",
+        "airline_jp": "チャイナエアライン",
+        "type": "フルキャリア",
+        "example_departure": "19:50",
+        "example_arrival": "22:30 (日本時間)",
+        "aircraft": "A350",
+        "frequency": "1便/日",
+        "notes": "夜間便"
+      },
+      {
+        "airline_name": "Starlux Airlines",
+        "airline_jp": "スターラックス航空",
+        "type": "フルキャリア",
+        "example_departure": "17:30",
+        "example_arrival": "20:20 (日本時間)",
+        "aircraft": "A330",
+        "frequency": "1便/日",
+        "notes": "夕方出発"
+      },
+      {
+        "airline_name": "Tiger Air Taiwan",
+        "airline_jp": "タイガーエア台湾",
+        "type": "LCC",
+        "example_departure": "13:20",
+        "example_arrival": "17:40 (日本時間)",
+        "aircraft": "A320",
+        "frequency": "1便/日",
+        "notes": "午後出発・最安値"
+      }
+    ]
+  },
+  "connecting_routes": {
+    "nagoya_hub": {
+      "hub_name": "名古屋（中部国際空港 NGO）",
+      "hub_name_en": "Chubu Centrair International Airport",
+      "total_flight_time": "5h 30m - 6h 00m",
+      "wait_time": "90-120分",
+      "patterns": [
+        {
+          "pattern_id": "NGO-OUT-1",
+          "direction": "outbound",
+          "leg1": {
+            "route": "SDJ → NGO",
+            "airlines": ["ANA", "FDA"],
+            "typical_departure": "07:00-08:00",
+            "flight_time": "1h 00m",
+            "typical_arrival": "08:00-09:00",
+            "notes": "朝便"
+          },
+          "connection": {
+            "waiting_time": "120分",
+            "connection_type": "国内→国際",
+            "notes": "国際線ターミナルへ移動"
+          },
+          "leg2": {
+            "route": "NGO → TPE",
+            "airlines": ["ANA", "China Airlines"],
+            "typical_departure": "10:00-11:00",
+            "flight_time": "3h 50m",
+            "typical_arrival": "14:00-15:00",
+            "aircraft": "B787"
+          },
+          "total_time": "7h 00m - 8h 00m",
+          "cost_savings": "15-25%"
+        }
+      ]
+    },
+    "fukuoka_hub": {
+      "hub_name": "福岡（福岡空港 FUK）",
+      "hub_name_en": "Fukuoka Airport",
+      "total_flight_time": "5h 30m - 6h 00m",
+      "wait_time": "90-120分",
+      "patterns": [
+        {
+          "pattern_id": "FUK-OUT-1",
+          "direction": "outbound",
+          "leg1": {
+            "route": "SDJ → FUK",
+            "airlines": ["ANA", "JAL", "SFJ"],
+            "typical_departure": "08:00",
+            "flight_time": "1h 45m",
+            "typical_arrival": "09:45",
+            "notes": "朝便・便数多い"
+          },
+          "connection": {
+            "waiting_time": "105分",
+            "connection_type": "国内→国際",
+            "notes": "国際線ターミナルで合流"
+          },
+          "leg2": {
+            "route": "FUK → TPE",
+            "airlines": ["EVA", "China Airlines"],
+            "typical_departure": "11:30",
+            "flight_time": "3h 00m",
+            "typical_arrival": "15:30",
+            "aircraft": "A330"
+          },
+          "total_time": "7h 30m",
+          "cost_savings": "18-28%"
+        }
+      ]
+    },
+    "okinawa_hub": {
+      "hub_name": "沖縄（那覇空港 OKA）",
+      "hub_name_en": "Naha Airport",
+      "total_flight_time": "5h 00m - 5h 30m",
+      "wait_time": "90-120分",
+      "patterns": [
+        {
+          "pattern_id": "OKA-OUT-1",
+          "direction": "outbound",
+          "leg1": {
+            "route": "SDJ → OKA",
+            "airlines": ["ANA", "JAL", "ACCA"],
+            "typical_departure": "10:30",
+            "flight_time": "2h 05m",
+            "typical_arrival": "12:35",
+            "notes": "昼間便"
+          },
+          "connection": {
+            "waiting_time": "105分",
+            "connection_type": "国内→国際",
+            "notes": "那覇空港内で乗り継ぎ"
+          },
+          "leg2": {
+            "route": "OKA → TPE",
+            "airlines": ["EVA", "Starlux"],
+            "typical_departure": "14:20",
+            "flight_time": "2h 30m",
+            "typical_arrival": "16:50",
+            "aircraft": "A321"
+          },
+          "total_time": "6h 20m",
+          "cost_savings": "12-22%"
+        }
+      ]
+    },
+    "kansai_kix_hub": {
+      "hub_name": "関西空港（KIX）",
+      "hub_name_en": "Kansai International Airport",
+      "total_flight_time": "5h 30m - 6h 30m",
+      "wait_time": "90-120分",
+      "patterns": [
+        {
+          "pattern_id": "KIX-OUT-1",
+          "direction": "outbound",
+          "leg1": {
+            "route": "SDJ → KIX",
+            "airlines": ["ANA", "IBEX"],
+            "typical_departure": "07:00",
+            "flight_time": "1h 30m",
+            "typical_arrival": "08:30",
+            "notes": "早朝便"
+          },
+          "connection": {
+            "waiting_time": "120分",
+            "connection_type": "国内→国際",
+            "notes": "関西空港国際ターミナル"
+          },
+          "leg2": {
+            "route": "KIX → TPE",
+            "airlines": ["China Airlines", "EVA"],
+            "typical_departure": "10:30",
+            "flight_time": "3h 30m",
+            "typical_arrival": "14:00",
+            "aircraft": "A350"
+          },
+          "total_time": "7h 00m",
+          "cost_savings": "10-20%"
+        }
+      ]
+    },
+    "osaka_itami_hub": {
+      "hub_name": "伊丹空港（ITM）",
+      "hub_name_en": "Osaka International Airport",
+      "total_flight_time": "5h 30m - 6h 30m",
+      "wait_time": "120-180分",
+      "note": "⚠️ 伊丹から台北への国際線は限定的。要確認",
+      "patterns": [
+        {
+          "pattern_id": "ITM-OUT-1",
+          "direction": "outbound",
+          "leg1": {
+            "route": "SDJ → ITM",
+            "airlines": ["ANA", "JAL"],
+            "typical_departure": "08:00",
+            "flight_time": "1h 00m",
+            "typical_arrival": "09:00",
+            "notes": "朝便"
+          },
+          "connection": {
+            "waiting_time": "150分",
+            "connection_type": "国内→国際（代替）",
+            "notes": "伊丹から関西空港へのバス移動が必要な場合あり"
+          },
+          "leg2": {
+            "route": "ITM → TPE（または関西経由）",
+            "airlines": ["Limited"],
+            "notes": "伊丹発国際線が限定的な為、実質的に関西空港経由となる可能性あり"
+          },
+          "total_time": "6h 30m+",
+          "cost_savings": "Variable",
+          "recommendation": "⚠️ 実現性低い、避けるべき"
+        }
+      ]
+    }
+  },
+  "return_routes": {
+    "note": "帰路は往路と同様のハブオプションが利用可能。台北発の時刻は現地時間",
+    "timezone_note": "台北（UTC+8）は日本（UTC+9）より1時間遅い"
+  },
+  "airport_combinations": {
+    "note": "台北桃園（TPE）と台北松山（TSA）の使い分け",
+    "details": [
+      {
+        "airport": "台北桃園国際空港 (TPE)",
+        "location": "台北市内より南西約40km",
+        "transport": "タクシー/バス/MRT約40-60分",
+        "international_flights": "主流（ほぼ全国際線）"
+      },
+      {
+        "airport": "台北松山空港 (TSA)",
+        "location": "台北市内より東約5km",
+        "transport": "MRT（松山新店線）利用・10分",
+        "international_flights": "限定的（日本・韓国・中国・東南アジア一部）"
+      }
+    ]
+  },
+  "notes": [
+    "※ 本データは2026年9月3日時点のサンプルパターンです",
+    "※ 実際の時刻表は季節・曜日により変動します",
+    "※ 国際線は需要に応じて臨時便が追加される場合があります",
+    "※ 最新の正確な時刻表は以下で確認してください：",
+    "  - NAVITIME: https://transit.navitime.com/",
+    "  - 駅探: https://ekitan.com/",
+    "  - 各航空会社公式サイト"
+  ]
+}

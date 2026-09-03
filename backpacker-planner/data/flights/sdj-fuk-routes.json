@@ -1,0 +1,86 @@
+{
+  "route": {
+    "departure": "SDJ",
+    "departure_name": "仙台空港",
+    "arrival": "FUK",
+    "arrival_name": "福岡空港",
+    "search_date": "2026-09-03"
+  },
+  "direct_flights": {
+    "summary": {
+      "weekly_frequency": 32,
+      "flight_time_min": "1時間45分",
+      "flight_time_max": "2時間12分",
+      "price_range": "¥11,070 - ¥85,000"
+    },
+    "carriers": [
+      {
+        "airline_name": "ANA",
+        "airline_jp": "全日本空輸",
+        "type": "フルキャリア",
+        "price_range": "¥22,536 - ¥47,000+",
+        "flight_time": "1時間45分",
+        "notes": "ANA SFC会員特典あり"
+      },
+      {
+        "airline_name": "JAL",
+        "airline_jp": "日本航空",
+        "type": "フルキャリア",
+        "price_range": "¥22,536 - ¥47,000+",
+        "flight_time": "1時間45分",
+        "notes": ""
+      },
+      {
+        "airline_name": "Star Flyer",
+        "airline_jp": "スターフライヤー",
+        "type": "フルキャリア",
+        "flight_example": "7G098便（19:09発）",
+        "flight_time": "約2時間",
+        "price_range": "¥11,070 -",
+        "notes": ""
+      },
+      {
+        "airline_name": "IBEX Airlines",
+        "airline_jp": "IBEXエアラインズ",
+        "type": "フルキャリア",
+        "flight_example": "FW014便（15:37発）",
+        "flight_time": "約2時間",
+        "price_range": "¥11,070 -",
+        "notes": ""
+      },
+      {
+        "airline_name": "Fuji Dream Airlines",
+        "airline_jp": "フジドリームエアラインズ",
+        "type": "フルキャリア",
+        "flight_time": "約2時間",
+        "price_range": "¥11,070 -",
+        "notes": ""
+      },
+      {
+        "airline_name": "Peach Aviation",
+        "airline_jp": "ピーチ・アビエーション",
+        "type": "LCC",
+        "flight_time": "直行便なし（乗り継ぎのみ）",
+        "price_range": "大手の約1/5",
+        "notes": "福岡・仙台へのルート有り"
+      }
+    ]
+  },
+  "connecting_flights": {
+    "summary": {
+      "flight_time": "4時間 - 4時間40分",
+      "price_range": "大手航空会社の約5分の1",
+      "popular_hub": "東京（羽田）"
+    },
+    "lcc_options": [
+      {
+        "route": "仙台（LCC）→ 東京 → 福岡（LCC）",
+        "carriers": ["ピーチ・アビエーション", "ジェットスター・ジャパン"],
+        "total_time": "4時間 - 4時間40分",
+        "cost_advantage": "大手の約5分の1",
+        "notes": "乗り継ぎのため、待機時間や乗り継ぎロスを考慮必要"
+      }
+    ]
+  },
+  "search_note": "※2026年9月3日時点の検索情報。最新の便数・料金はOTA（Expedia, Trip.com等）やキャリアの公式サイトで確認推奨"
+}
