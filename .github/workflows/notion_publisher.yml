@@ -2,50 +2,75 @@ name: Daily Notion Publisher
 
 on:
   schedule:
-    # 毎日午前9時（UTC+9で翌朝）に実行
-    - cron: '0 21 * * *'
-  workflow_dispatch:  # 手動トリガー用
+    - cron: '0 21 * * *'  # UTC 21:00 (Japan 6am)
+  workflow_dispatch:
+
+env:
+  LANG: C.UTF-8
+  LC_ALL: C.UTF-8
 
 jobs:
-  publish:
+  notion-publisher:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Set up Python 3.9
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
 
       - name: Install dependencies
-        working-directory: ./リサーチ
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          python -m pip install requests python-dotenv feedparser
 
-      - name: Create .env file
-        working-directory: ./リサーチ
+      - name: Debug - Show script locations
         run: |
-          cat > config/.env << EOF
-          MAKE_WEBHOOK_URL=${{ secrets.MAKE_WEBHOOK_URL }}
-          NOTION_API_KEY=${{ secrets.NOTION_API_KEY }}
-          NOTION_DATABASE_ID=${{ secrets.NOTION_DATABASE_ID }}
-          ANTHROPIC_API_KEY=${{ secrets.ANTHROPIC_API_KEY }}
-          EOF
+          echo "=== Current directory ==="
+          pwd
+          echo ""
+          echo "=== Looking for scripts ==="
+          find . -name "rss_collector.py" -o -name "notion_publisher.py"
+          echo ""
+          echo "=== Verify they are executable ==="
+          ls -la $(find . -name "rss_collector.py" -type f | head -1) 2>/dev/null || echo "Not found"
+          ls -la $(find . -name "notion_publisher.py" -type f | head -1) 2>/dev/null || echo "Not found"
 
       - name: Collect RSS articles
-        working-directory: ./リサーチ
-        run: python3 src/collectors/rss_collector.py
+        env:
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          MAKE_WEBHOOK_URL: ${{ secrets.MAKE_WEBHOOK_URL }}
+        run: |
+          SCRIPT=$(find . -name "rss_collector.py" -type f | head -1)
+          if [ -z "$SCRIPT" ]; then
+            echo "ERROR: rss_collector.py not found"
+            exit 1
+          fi
+          echo "Running: $SCRIPT"
+          python "$SCRIPT"
 
-      - name: Publish to Notion
-        working-directory: ./リサーチ
-        run: python3 src/processors/notion_publisher.py
+      - name: Process with Claude and publish to Notion
+        env:
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          MAKE_WEBHOOK_URL: ${{ secrets.MAKE_WEBHOOK_URL }}
+        run: |
+          SCRIPT=$(find . -name "notion_publisher.py" -path "*/processors/*" -type f | head -1)
+          if [ -z "$SCRIPT" ]; then
+            echo "ERROR: notion_publisher.py not found"
+            exit 1
+          fi
+          echo "Running: $SCRIPT"
+          python "$SCRIPT"
 
       - name: Upload logs
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: execution-logs
-          path: ./リサーチ/data/processed/
+          name: notion-publisher-logs
+          path: /tmp/notion_output.log
+          retention-days: 7
