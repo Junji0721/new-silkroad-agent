@@ -1,0 +1,51 @@
+name: Daily Notion Publisher
+
+on:
+  schedule:
+    - cron: '0 21 * * *'  # UTC 21:00 (Japan 6am)
+  workflow_dispatch:
+
+jobs:
+  notion-publisher:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          cd リサーチ
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Create .env file
+        run: |
+          cd リサーチ
+          cat > config/.env << 'EOF'
+          MAKE_WEBHOOK_URL=${{ secrets.MAKE_WEBHOOK_URL }}
+          NOTION_API_KEY=${{ secrets.NOTION_API_KEY }}
+          NOTION_DATABASE_ID=${{ secrets.NOTION_DATABASE_ID }}
+          ANTHROPIC_API_KEY=${{ secrets.ANTHROPIC_API_KEY }}
+          EOF
+
+      - name: Collect RSS articles
+        run: |
+          cd リサーチ
+          python src/collectors/rss_collector.py
+
+      - name: Process with Claude and publish to Notion
+        run: |
+          cd リサーチ
+          python src/processors/notion_publisher.py
+
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: notion-publisher-logs
+          path: /tmp/notion_output.log
+          retention-days: 7
