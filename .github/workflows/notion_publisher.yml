@@ -11,17 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Debug - Show directory structure
-        run: |
-          echo "=== Repository root ==="
-          ls -la
-          echo ""
-          echo "=== Contents of repository ==="
-          find . -maxdepth 2 -type d | head -20
-          echo ""
-          echo "=== Current working directory ==="
-          pwd
-
       - name: Set up Python 3.9
         uses: actions/setup-python@v4
         with:
@@ -30,28 +19,22 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          if [ -f new-silkroad-agent/リサーチ/requirements.txt ]; then
-            pip install -r new-silkroad-agent/リサーチ/requirements.txt
-          elif [ -f リサーチ/requirements.txt ]; then
-            pip install -r リサーチ/requirements.txt
-          else
-            echo "requirements.txt not found"
-            exit 1
+          python -m pip install requests python-dotenv feedparser
+
+      - name: Find research directory and install requirements
+        run: |
+          # Find the リサーチ directory (use find to avoid encoding issues)
+          RESEARCH_DIR=$(find . -maxdepth 2 -type d -name "*" | grep -E "(research|リサーチ)" | head -1 2>/dev/null || echo "new-silkroad-agent/リサーチ")
+          echo "RESEARCH_DIR=$RESEARCH_DIR" >> $GITHUB_ENV
+          
+          if [ -f "$RESEARCH_DIR/requirements.txt" ]; then
+            python -m pip install -r "$RESEARCH_DIR/requirements.txt"
           fi
 
       - name: Create .env file
         run: |
-          RESEARCH_DIR=""
-          if [ -d "new-silkroad-agent/リサーチ" ]; then
-            RESEARCH_DIR="new-silkroad-agent/リサーチ"
-          elif [ -d "リサーチ" ]; then
-            RESEARCH_DIR="リサーチ"
-          else
-            echo "リサーチ directory not found"
-            exit 1
-          fi
-          
-          cat > "$RESEARCH_DIR/config/.env" << 'ENVEOF'
+          mkdir -p "${{ env.RESEARCH_DIR }}/config"
+          cat > "${{ env.RESEARCH_DIR }}/config/.env" << 'ENVEOF'
           MAKE_WEBHOOK_URL=${{ secrets.MAKE_WEBHOOK_URL }}
           NOTION_API_KEY=${{ secrets.NOTION_API_KEY }}
           NOTION_DATABASE_ID=${{ secrets.NOTION_DATABASE_ID }}
@@ -60,19 +43,11 @@ jobs:
 
       - name: Collect RSS articles
         run: |
-          if [ -d "new-silkroad-agent/リサーチ" ]; then
-            python new-silkroad-agent/リサーチ/src/collectors/rss_collector.py
-          else
-            python リサーチ/src/collectors/rss_collector.py
-          fi
+          python "${{ env.RESEARCH_DIR }}/src/collectors/rss_collector.py"
 
       - name: Process with Claude and publish to Notion
         run: |
-          if [ -d "new-silkroad-agent/リサーチ" ]; then
-            python new-silkroad-agent/リサーチ/src/processors/notion_publisher.py
-          else
-            python リサーチ/src/processors/notion_publisher.py
-          fi
+          python "${{ env.RESEARCH_DIR }}/src/processors/notion_publisher.py"
 
       - name: Upload logs
         if: always()
