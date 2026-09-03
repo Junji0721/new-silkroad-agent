@@ -17,14 +17,14 @@ jobs:
           python-version: '3.9'
 
       - name: Install dependencies
+        working-directory: ${{ github.workspace }}/リサーチ
         run: |
-          cd リサーチ
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
       - name: Create .env file
+        working-directory: ${{ github.workspace }}/リサーチ
         run: |
-          cd リサーチ
           cat > config/.env << 'ENVEOF'
           MAKE_WEBHOOK_URL=${{ secrets.MAKE_WEBHOOK_URL }}
           NOTION_API_KEY=${{ secrets.NOTION_API_KEY }}
@@ -33,14 +33,12 @@ jobs:
           ENVEOF
 
       - name: Collect RSS articles
-        run: |
-          cd リサーチ
-          python src/collectors/rss_collector.py
+        working-directory: ${{ github.workspace }}/リサーチ
+        run: python src/collectors/rss_collector.py
 
       - name: Process with Claude and publish to Notion
-        run: |
-          cd リサーチ
-          python src/processors/notion_publisher.py
+        working-directory: ${{ github.workspace }}/リサーチ
+        run: python src/processors/notion_publisher.py
 
       - name: Upload logs
         if: always()
