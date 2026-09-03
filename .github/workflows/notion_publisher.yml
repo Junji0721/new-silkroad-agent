@@ -9,7 +9,7 @@ jobs:
   notion-publisher:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up Python 3.9
         uses: actions/setup-python@v4
@@ -25,12 +25,12 @@ jobs:
       - name: Create .env file
         run: |
           cd リサーチ
-          cat > config/.env << 'EOF'
+          cat > config/.env << 'ENVEOF'
           MAKE_WEBHOOK_URL=${{ secrets.MAKE_WEBHOOK_URL }}
           NOTION_API_KEY=${{ secrets.NOTION_API_KEY }}
           NOTION_DATABASE_ID=${{ secrets.NOTION_DATABASE_ID }}
           ANTHROPIC_API_KEY=${{ secrets.ANTHROPIC_API_KEY }}
-          EOF
+          ENVEOF
 
       - name: Collect RSS articles
         run: |
@@ -44,7 +44,7 @@ jobs:
 
       - name: Upload logs
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: notion-publisher-logs
           path: /tmp/notion_output.log
