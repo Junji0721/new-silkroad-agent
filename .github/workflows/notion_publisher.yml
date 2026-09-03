@@ -21,33 +21,15 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install requests python-dotenv feedparser
 
-      - name: Find research directory and install requirements
+      - name: Create .env and run
+        env:
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          MAKE_WEBHOOK_URL: ${{ secrets.MAKE_WEBHOOK_URL }}
         run: |
-          # Find the リサーチ directory (use find to avoid encoding issues)
-          RESEARCH_DIR=$(find . -maxdepth 2 -type d -name "*" | grep -E "(research|リサーチ)" | head -1 2>/dev/null || echo "new-silkroad-agent/リサーチ")
-          echo "RESEARCH_DIR=$RESEARCH_DIR" >> $GITHUB_ENV
-          
-          if [ -f "$RESEARCH_DIR/requirements.txt" ]; then
-            python -m pip install -r "$RESEARCH_DIR/requirements.txt"
-          fi
-
-      - name: Create .env file
-        run: |
-          mkdir -p "${{ env.RESEARCH_DIR }}/config"
-          cat > "${{ env.RESEARCH_DIR }}/config/.env" << 'ENVEOF'
-          MAKE_WEBHOOK_URL=${{ secrets.MAKE_WEBHOOK_URL }}
-          NOTION_API_KEY=${{ secrets.NOTION_API_KEY }}
-          NOTION_DATABASE_ID=${{ secrets.NOTION_DATABASE_ID }}
-          ANTHROPIC_API_KEY=${{ secrets.ANTHROPIC_API_KEY }}
-          ENVEOF
-
-      - name: Collect RSS articles
-        run: |
-          python "${{ env.RESEARCH_DIR }}/src/collectors/rss_collector.py"
-
-      - name: Process with Claude and publish to Notion
-        run: |
-          python "${{ env.RESEARCH_DIR }}/src/processors/notion_publisher.py"
+          python new-silkroad-agent/src/collectors/rss_collector.py
+          python new-silkroad-agent/src/processors/notion_publisher.py
 
       - name: Upload logs
         if: always()
