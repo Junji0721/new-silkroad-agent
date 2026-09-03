@@ -25,6 +25,17 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install requests python-dotenv feedparser
 
+      - name: Debug - Show script locations
+        run: |
+          echo "=== Current directory ==="
+          pwd
+          echo ""
+          echo "=== Looking for scripts ==="
+          find . -name "rss_collector.py" -o -name "notion_publisher.py"
+          echo ""
+          echo "=== Full directory structure ==="
+          find . -maxdepth 3 -type d | head -20
+
       - name: Collect RSS articles
         env:
           NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
@@ -32,7 +43,13 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           MAKE_WEBHOOK_URL: ${{ secrets.MAKE_WEBHOOK_URL }}
         run: |
-          find . -name "rss_collector.py" -type f -exec python {} \;
+          SCRIPT=$(find . -name "rss_collector.py" -type f | head -1)
+          if [ -z "$SCRIPT" ]; then
+            echo "ERROR: rss_collector.py not found"
+            exit 1
+          fi
+          echo "Running: $SCRIPT"
+          python "$SCRIPT"
 
       - name: Process with Claude and publish to Notion
         env:
@@ -41,7 +58,13 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           MAKE_WEBHOOK_URL: ${{ secrets.MAKE_WEBHOOK_URL }}
         run: |
-          find . -name "notion_publisher.py" -path "*/processors/*" -type f -exec python {} \;
+          SCRIPT=$(find . -name "notion_publisher.py" -path "*/processors/*" -type f | head -1)
+          if [ -z "$SCRIPT" ]; then
+            echo "ERROR: notion_publisher.py not found"
+            exit 1
+          fi
+          echo "Running: $SCRIPT"
+          python "$SCRIPT"
 
       - name: Upload logs
         if: always()
