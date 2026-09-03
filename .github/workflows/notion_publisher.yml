@@ -5,6 +5,10 @@ on:
     - cron: '0 21 * * *'  # UTC 21:00 (Japan 6am)
   workflow_dispatch:
 
+env:
+  LANG: C.UTF-8
+  LC_ALL: C.UTF-8
+
 jobs:
   notion-publisher:
     runs-on: ubuntu-latest
@@ -21,15 +25,23 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install requests python-dotenv feedparser
 
-      - name: Create .env and run
+      - name: Collect RSS articles
         env:
           NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           MAKE_WEBHOOK_URL: ${{ secrets.MAKE_WEBHOOK_URL }}
         run: |
-          python new-silkroad-agent/src/collectors/rss_collector.py
-          python new-silkroad-agent/src/processors/notion_publisher.py
+          find . -name "rss_collector.py" -type f -exec python {} \;
+
+      - name: Process with Claude and publish to Notion
+        env:
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          MAKE_WEBHOOK_URL: ${{ secrets.MAKE_WEBHOOK_URL }}
+        run: |
+          find . -name "notion_publisher.py" -path "*/processors/*" -type f -exec python {} \;
 
       - name: Upload logs
         if: always()
